@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: posts
-          image: fujinugraha/posts:v1
+          image: fujinugraha/posts
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-cluster-ip-srv
+  name: posts-clusterip-srv
 spec:
   type: ClusterIP
   selector:
