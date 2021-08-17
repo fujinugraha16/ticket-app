@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    apps: posts
+    app: posts
   ports:
     - name: posts
       protocol: TCP
