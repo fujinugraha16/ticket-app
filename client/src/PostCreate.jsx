@@ -7,7 +7,7 @@ const PostCreate = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.post("http://my-micro-kube.org/posts", {
+    await axios.post("http://my-micro-kube.org/posts/create", {
       title,
     });
 
