@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    mathlabels:
+    matchLabels:
       app: auth
   template:
     metadata:
