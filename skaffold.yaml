@@ -1,8 +1,8 @@
-apiVersion: skaffold/v2beta21
+apiVersion: skaffold/v2beta20
 kind: Config
 deploy:
   kubectl:
-    manifest:
+    manifests:
       - "./infra/k8s/*.yaml"
 build:
   local:
