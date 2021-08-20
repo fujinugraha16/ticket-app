@@ -1,6 +1,7 @@
 import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
+import mongoose from "mongoose";
 
 // routers
 import { currentUserRouter } from "./routes/current-user";
@@ -28,6 +29,21 @@ app.all("*", async () => {
 
 app.use(errorHandler);
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000 ...");
-});
+const start = async () => {
+  try {
+    await mongoose.connect("mongodb://auth-mongo-clusterip-srv:27017/auth", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+    console.log("Connected to mongodb ...");
+  } catch (err) {
+    console.log(err);
+  }
+
+  app.listen(3000, () => {
+    console.log("Listening on port 3000 ...");
+  });
+};
+
+start();
