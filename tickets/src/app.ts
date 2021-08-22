@@ -4,6 +4,7 @@ import { json } from "body-parser";
 import cookieSession from "cookie-session";
 
 // routers
+import { createTicketRouter } from "./routes/new";
 
 // middlewares and errors
 import { errorHandler, NotFoundError } from "@fujingrtickets/common";
@@ -17,6 +18,8 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
+
+app.use(createTicketRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();
