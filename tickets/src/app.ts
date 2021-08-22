@@ -7,7 +7,11 @@ import cookieSession from "cookie-session";
 import { createTicketRouter } from "./routes/new";
 
 // middlewares and errors
-import { errorHandler, NotFoundError } from "@fujingrtickets/common";
+import {
+  errorHandler,
+  NotFoundError,
+  currentUser,
+} from "@fujingrtickets/common";
 
 const app = express();
 app.set("trust proxy", true);
@@ -18,6 +22,8 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
+
+app.use(currentUser);
 
 app.use(createTicketRouter);
 
