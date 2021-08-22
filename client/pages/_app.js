@@ -15,7 +15,9 @@ App.getInitialProps = async (appContext) => {
   const client = buildClient(appContext.ctx);
   const { data } = await client.get("/api/users/currentuser");
 
-  return data;
+  return {
+    currentUser: data.currentUser,
+  };
 };
 
 export default App;

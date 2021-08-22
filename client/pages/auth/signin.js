@@ -23,7 +23,7 @@ const Signin = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h1>Sign Ip</h1>
+      <h1>Sign In</h1>
       <div className="mb-3">
         <label>Email Address</label>
         <input
