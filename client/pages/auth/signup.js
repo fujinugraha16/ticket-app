@@ -1,30 +1,27 @@
 import { useState } from "react";
 import axios from "axios";
+import useRequest from "../../hooks/use-request";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
 
-  const onSubmit = async (event) => {
+  const { doRequest, errors } = useRequest({
+    url: "/api/users/signup",
+    method: "post",
+    body: { email, password },
+  });
+
+  const onSubmit = (event) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.post("/api/users/signup", {
-        email,
-        password,
-      });
-
-      console.log(response.data);
-    } catch (err) {
-      setErrors(err.response.data.errors);
-    }
+    doRequest();
   };
 
   return (
     <form onSubmit={onSubmit}>
       <h1>Sign Up</h1>
-      <div className="form-group">
+      <div className="mb-3">
         <label>Email Address</label>
         <input
           value={email}
@@ -32,7 +29,7 @@ const Signup = () => {
           className="form-control"
         />
       </div>
-      <div className="form-group">
+      <div className="mb-3">
         <label>Password</label>
         <input
           value={password}
@@ -41,16 +38,9 @@ const Signup = () => {
           className="form-control"
         />
       </div>
-      {errors.length > 0 && (
-        <div className="alert alert-danger">
-          <h4>Ooops...</h4>
-          <ul className="my-0">
-            {errors.map((err) => (
-              <li key={err}>{err.message}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+
+      {errors}
+
       <button type="submit" className="btn btn-primary">
         Signup
       </button>
