@@ -9,11 +9,8 @@ import { signinUserRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
 
-// middlewares
-import { errorHandler } from "./middlewares/error-handler";
-
-// errors
-import { NotFoundError } from "./errors/not-found-error";
+// middlewares and errors
+import { errorHandler, NotFoundError } from "@fujingrtickets/common";
 
 const app = express();
 app.set("trust proxy", true);

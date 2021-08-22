@@ -1,7 +1,7 @@
 import express from "express";
 
 // middlewares
-import { currentUser } from "../middlewares/current-user";
+import { currentUser } from "@fujingrtickets/common";
 
 const router = express.Router();
 

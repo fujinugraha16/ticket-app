@@ -2,11 +2,8 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 
-// errors
-import { BadRequestError } from "../errors/bad-request-error";
-
-// middlewares
-import { validateRequest } from "../middlewares/validate-request";
+// middlewares and errors
+import { validateRequest, BadRequestError } from "@fujingrtickets/common";
 
 // models
 import { User } from "../models/user";

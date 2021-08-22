@@ -6,11 +6,8 @@ import { Password } from "../services/password";
 // models
 import { User } from "../models/user";
 
-// middlewares
-import { validateRequest } from "../middlewares/validate-request";
-
-// errors
-import { BadRequestError } from "../errors/bad-request-error";
+// middlewares and errors
+import { validateRequest, BadRequestError } from "@fujingrtickets/common";
 
 const router = express.Router();
 
