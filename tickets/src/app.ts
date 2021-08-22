@@ -5,6 +5,7 @@ import cookieSession from "cookie-session";
 
 // routers
 import { createTicketRouter } from "./routes/new";
+import { showTicketRouter } from "./routes/show";
 
 // middlewares and errors
 import {
@@ -26,6 +27,7 @@ app.use(
 app.use(currentUser);
 
 app.use(createTicketRouter);
+app.use(showTicketRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();
