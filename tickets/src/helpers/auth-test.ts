@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 export const signin = () => {
@@ -5,7 +6,7 @@ export const signin = () => {
   // Build a JWT payload. {id, email}
   // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMjI1YzZjYzAyMGZiMDAyZTVmNzU3NiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJpYXQiOjE2Mjk2NDE4MzZ9.mPdFWLNNtFodUQYesfUtOD1z7Txt9ZBfHynl9kcm2cU
   const payload = {
-    id: "6434234adfa32",
+    id: new mongoose.Types.ObjectId().toHexString(),
     email: "test@test.com",
   };
 
