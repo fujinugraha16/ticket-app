@@ -17,6 +17,8 @@ it("returns a 404 if the provided id does not exist", async () => {
 });
 
 it("returns a 401 if the user is not authenticated", async () => {
+  const id = mongoose.Types.ObjectId().toHexString();
+
   await request(app)
     .put(`/api/tickets/${id}`)
     .send({
