@@ -1,11 +1,19 @@
 import { useState } from "react";
+import axios from "axios";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+
+    const response = await axios.post("/api/users/signup", {
+      email,
+      password,
+    });
+
+    console.log(response.data);
   };
 
   return (
@@ -28,7 +36,9 @@ const Signup = () => {
           className="form-control"
         />
       </div>
-      <button className="btn btn-primary">Signup</button>
+      <button type="submit" className="btn btn-primary">
+        Signup
+      </button>
     </form>
   );
 };
