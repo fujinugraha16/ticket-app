@@ -1,4 +1,4 @@
-import axios from "axios";
+import buildClient from "../api/build-client";
 
 const LandingPage = ({ currentUser }) => {
   console.log(currentUser);
@@ -6,17 +6,8 @@ const LandingPage = ({ currentUser }) => {
   return <h1>Landing Page</h1>;
 };
 
-export const getServerSideProps = async ({ req }) => {
-  const { data } = await axios.get(
-    // http://SERVICE_NAME.NAMESPACE.svc.cluster.local/
-    "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser",
-    {
-      // headers: {
-      //   Host: "ticketing.dev",
-      // },
-      headers: req.headers,
-    }
-  );
+export const getServerSideProps = async (context) => {
+  const { data } = buildClient(context).get("/api/users/currentuser");
 
   return {
     props: {
