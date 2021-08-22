@@ -17,3 +17,9 @@ spec:
                 name: auth-clusterip-srv
                 port:
                   number: 3000
+          - path: /?(.*)
+            backend:
+              service:
+                name: client-clusterip-srv
+                port:
+                  number: 3000
