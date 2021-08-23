@@ -7,11 +7,12 @@ spec:
   selector:
     matchLabels:
       app: nats
-    template:
-      metadata:
-        labels:
-          app: nats
-      spec:
+  template:
+    metadata:
+      labels:
+        app: nats
+    spec:
+      containers:
         - name: nats
           image: nats-streaming
           args:
@@ -36,6 +37,7 @@ kind: Service
 metadata:
   name: nats-clusterip-srv
 spec:
+  type: ClusterIP
   selector:
     app: nats
   ports:
