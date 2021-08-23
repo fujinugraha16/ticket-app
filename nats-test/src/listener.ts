@@ -76,7 +76,7 @@ abstract class Listener {
     });
   }
 
-  parseMessage(msg) {
+  parseMessage(msg: Message) {
     const data = msg.getData();
     return typeof data === "string"
       ? JSON.parse(data)
