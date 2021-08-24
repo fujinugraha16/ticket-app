@@ -2,6 +2,9 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest } from "@fujingrtickets/common";
 
+// nats
+import { natsWrapper } from "../nats-wrapper";
+
 // models
 import { Ticket } from "../models/ticket";
 
@@ -31,7 +34,7 @@ router.post(
     await ticket.save();
 
     // publish event
-    new TicketCreatedPublisher(client).publish({
+    new TicketCreatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
