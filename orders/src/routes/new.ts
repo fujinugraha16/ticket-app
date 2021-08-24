@@ -5,8 +5,7 @@ import {
   requireAuth,
   validateRequest,
   NotFoundError,
-  BadRequestE,
-  BadRequestErrorrror,
+  BadRequestError,
   OrderStatus,
 } from "@fujingrtickets/common";
 
@@ -40,17 +39,8 @@ router.post(
     // Run query to look at all ordes. Find an order where the ticket
     // is the ticket we just foun *and* the orders status is *not* cancelled
     // If we find an order from that means the ticket *is* reserved
-    const existingOrder = await Order.findOne({
-      ticket: ticket,
-      status: {
-        $in: [
-          OrderStatus.Created,
-          OrderStatus.AwaitingPayment,
-          OrderStatus.Complete,
-        ],
-      },
-    });
-    if (existingOrder) {
+    const isReserved = await ticket.isReserved();
+    if (isReserved) {
       throw new BadRequestError("Ticket is already reserved");
     }
 
