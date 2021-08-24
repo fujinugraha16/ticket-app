@@ -6,7 +6,13 @@ import {
   requireAuth,
   NotAuthorizedError,
 } from "@fujingrtickets/common";
+import { natsWrapper } from "../nats-wrapper";
+
+// models
 import { Ticket } from "../models/ticket";
+
+// events
+import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
 
 const router = express.Router();
 
@@ -36,6 +42,14 @@ router.put(
       price: req.body.price,
     });
     await ticket.save();
+
+    // publish
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
 
     res.status(200).send(ticket);
   }
