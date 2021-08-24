@@ -5,6 +5,9 @@ import {
   requireAuth,
   validateRequest,
   NotFoundError,
+  BadRequestE,
+  BadRequestErrorrror,
+  OrderStatus,
 } from "@fujingrtickets/common";
 
 // models
@@ -34,6 +37,22 @@ router.post(
     }
 
     // Make sure that this ticket is not already reserved
+    // Run query to look at all ordes. Find an order where the ticket
+    // is the ticket we just foun *and* the orders status is *not* cancelled
+    // If we find an order from that means the ticket *is* reserved
+    const existingOrder = await Order.findOne({
+      ticket: ticket,
+      status: {
+        $in: [
+          OrderStatus.Created,
+          OrderStatus.AwaitingPayment,
+          OrderStatus.Complete,
+        ],
+      },
+    });
+    if (existingOrder) {
+      throw new BadRequestError("Ticket is already reserved");
+    }
 
     // Calculate an expiration for this order
 
