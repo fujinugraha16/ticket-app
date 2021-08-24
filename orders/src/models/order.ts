@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { OrderStatus } from "@fujingrtickets/common";
+import { TicketDoc } from "./ticket";
 
 interface OrderAttrs {
   userId: string;
@@ -15,7 +16,7 @@ interface OrderDoc extends mongoose.Document {
   ticket: TicketDoc;
 }
 
-interface OrderModel extends mongooes.Model<OrderDoc> {
+interface OrderModel extends mongoose.Model<OrderDoc> {
   build(attrs: OrderAttrs): OrderDoc;
 }
 
