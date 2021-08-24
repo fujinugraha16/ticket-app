@@ -13,11 +13,20 @@ const start = async () => {
   }
 
   try {
+    // nats streamer
     await natsWrapper.connect(
       "ticketing",
-      "asdf",
+      "aasdff",
       "http://nats-clusterip-srv:4222"
     );
+    natsWrapper.client.on("close", () => {
+      console.log("NATS connection closed!");
+      process.exit();
+    });
+    process.on("SIGINT", () => natsWrapper.client.close());
+    process.on("SIGTERM", () => natsWrapper.client.close());
+
+    // mongoose
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
