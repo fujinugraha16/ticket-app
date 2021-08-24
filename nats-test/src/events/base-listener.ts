@@ -17,6 +17,7 @@ export abstract class Listener<T extends Event> {
     this.client = client;
   }
 
+  // helper func
   subcriptionOptions() {
     return this.client
       .subscriptionOptions()
@@ -26,6 +27,14 @@ export abstract class Listener<T extends Event> {
       .setDurableName(this.queueGroupName);
   }
 
+  parseMessage(msg: Message) {
+    const data = msg.getData();
+    return typeof data === "string"
+      ? JSON.parse(data)
+      : JSON.parse(data.toString("utf8"));
+  }
+
+  // main func
   listen() {
     const subscription = this.client.subscribe(
       this.subject,
@@ -39,12 +48,5 @@ export abstract class Listener<T extends Event> {
       const parsedData = this.parseMessage(msg);
       this.onMessage(parsedData, msg);
     });
-  }
-
-  parseMessage(msg: Message) {
-    const data = msg.getData();
-    return typeof data === "string"
-      ? JSON.parse(data)
-      : JSON.parse(data.toString("utf8"));
   }
 }
