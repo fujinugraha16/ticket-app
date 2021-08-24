@@ -5,6 +5,9 @@ import { requireAuth, validateRequest } from "@fujingrtickets/common";
 // models
 import { Ticket } from "../models/ticket";
 
+// events
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
+
 const router = express.Router();
 
 router.post(
@@ -26,6 +29,14 @@ router.post(
       userId: req.currentUser!.id,
     });
     await ticket.save();
+
+    new TicketCreatedPublisher(client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket,
+      userId,
+    });
 
     res.status(201).send(ticket);
   }
