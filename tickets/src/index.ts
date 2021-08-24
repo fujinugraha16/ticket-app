@@ -16,7 +16,7 @@ const start = async () => {
     // nats streamer
     await natsWrapper.connect(
       "ticketing",
-      "aasdff",
+      "aasdf",
       "http://nats-clusterip-srv:4222"
     );
     natsWrapper.client.on("close", () => {
