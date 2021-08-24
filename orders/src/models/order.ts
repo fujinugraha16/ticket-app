@@ -50,7 +50,7 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-orderSchema.statics.build = (attrs: OrderAttrs) => new Order(Attrs);
+orderSchema.statics.build = (attrs: OrderAttrs) => new Order(attrs);
 
 const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
 
