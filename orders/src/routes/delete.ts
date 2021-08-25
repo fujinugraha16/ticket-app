@@ -10,7 +10,7 @@ import { Order, OrderStatus } from "../models/order";
 
 // events
 import { natsWrapper } from "../nats-wrapper";
-import { OrderCancelledPublisher } from "../events/order-cancelled-publisher";
+import { OrderCancelledPublisher } from "../events/publisher/order-cancelled-publisher";
 
 const router = express.Router();
 

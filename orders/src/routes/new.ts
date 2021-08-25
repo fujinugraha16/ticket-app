@@ -15,7 +15,7 @@ import { Order } from "../models/order";
 
 // events
 import { natsWrapper } from "../nats-wrapper";
-import { OrderCreatedPublisher } from "../events/order-created-publisher";
+import { OrderCreatedPublisher } from "../events/publisher/order-created-publisher";
 
 const router = express.Router();
 
