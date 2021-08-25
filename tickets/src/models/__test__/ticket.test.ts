@@ -1,6 +1,6 @@
 import { Ticket } from "../../models/ticket";
 
-it("implements optimistic concurrency control", async (done) => {
+it("implements optimistic concurrency control", async () => {
   // Create an intance of a ticket
   const ticket = Ticket.build({
     title: "concert",
@@ -26,8 +26,7 @@ it("implements optimistic concurrency control", async (done) => {
   try {
     await secondInstance!.save();
   } catch (err) {
-    return done();
+    return;
   }
-
   throw new Error("Should not reach this point");
 });
