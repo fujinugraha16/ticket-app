@@ -29,6 +29,8 @@ router.patch(
     await order.save();
 
     res.status(204).send(order);
+
+    // publishing an event saying this was cancelled
   }
 );
 
