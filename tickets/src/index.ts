@@ -26,10 +26,6 @@ const start = async () => {
     throw new Error("NATS_URL must be defined");
   }
 
-  // listener
-  new OrderCreatedListener(natsWrapper.client).listen();
-  new OrderCancelledListener(natsWrapper.client).listen();
-
   try {
     // nats streamer
     await natsWrapper.connect(
@@ -43,6 +39,10 @@ const start = async () => {
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    // listener
+    new OrderCreatedListener(natsWrapper.client).listen();
+    new OrderCancelledListener(natsWrapper.client).listen();
 
     // mongoose
     await mongoose.connect(process.env.MONGO_URI, {
