@@ -5,6 +5,9 @@ import { queueGroupName } from "./queue-group-name";
 // models
 import { Ticket } from "../../models/ticket";
 
+// events
+import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";
+
 export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   readonly subject = Subjects.OrderCreated;
   queueGroupName = queueGroupName;
@@ -23,6 +26,16 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 
     // save the ticket
     await ticket.save();
+
+    // publish ticket update
+    await new TicketUpdatedPublisher(this.client).publish({
+      id: ticket.id,
+      price: ticket.price,
+      title: ticket.title,
+      userId: ticket.userId,
+      version: ticket.version,
+      orderId: ticket.orderId,
+    });
 
     // ack the message
     msg.ack();
