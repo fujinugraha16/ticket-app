@@ -44,7 +44,7 @@ const start = async () => {
 
     // event listeners
     new TicketCreatedListener(natsWrapper.client).listen();
-    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
 
     // mongoose
     await mongoose.connect(process.env.MONGO_URI, {
