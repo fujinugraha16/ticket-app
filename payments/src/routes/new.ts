@@ -26,7 +26,7 @@ router.post(
     }
 
     if (order.userId !== req.currentUser!.id) {
-      throw new NoAuthorizeError();
+      throw new NotAuthorizedError();
     }
 
     if (order.status === OrderStatus.Cancelled) {
