@@ -14,7 +14,7 @@ import { Order } from "../models/order";
 import { Payment } from "../models/payment";
 
 // events
-import { PaymentCreatedPublisher } from "../events/publisher/payment-created-publisher";
+import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publisher";
 import { natsWrapper } from "../natsWrapper";
 
 // Stripe
