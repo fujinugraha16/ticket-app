@@ -9,16 +9,8 @@ const LandingPage = ({ currentUser }) => {
 };
 
 export const getServerSideProps = async (context) => {
-  const client = buildClient(context);
-  const { data } = await client.get("/api/users/currentuser");
-
-  console.log("LANDING PAGE");
-  console.log(data);
-
   return {
-    props: {
-      ...data,
-    },
+    props: {},
   };
 };
 
