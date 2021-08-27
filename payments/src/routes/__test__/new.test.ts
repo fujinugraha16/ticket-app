@@ -5,6 +5,7 @@ import { OrderStatus } from "@fujingrtickets/common";
 
 // models
 import { Order } from "../../models/order";
+import { Payment } from "../../models/payment";
 
 // helpers
 import { signin } from "../../helpers/auth-test";
@@ -79,7 +80,7 @@ it("returns a 201 with valid inputs", async () => {
   });
   await order.save();
 
-  await request(app)
+  const response = await request(app)
     .post("/api/payments")
     .set("Cookie", signin(userId))
     .send({

@@ -11,7 +11,7 @@ interface PaymentDoc extends mongoose.Document {
 }
 
 interface PaymentModel extends mongoose.Model<PaymentDoc> {
-  buid(attrs: PaymentAttrs): PaymentDoc;
+  build(attrs: PaymentAttrs): PaymentDoc;
 }
 
 const paymentSchema = new mongoose.Schema(
