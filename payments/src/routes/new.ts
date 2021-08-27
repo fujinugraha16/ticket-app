@@ -8,6 +8,8 @@ import {
   NotAuthorizedError,
   OrderStatus,
 } from "@fujingrtickets/common";
+
+// models
 import { Order } from "../models/order";
 
 const router = express.Router();
@@ -15,7 +17,7 @@ const router = express.Router();
 router.post(
   "/api/payments",
   requireAuth,
-  [body("token").not().isEmpty(), body("orderId").not().isEmpty],
+  [body("token").not().isEmpty(), body("orderId").not().isEmpty()],
   validateRequest,
   async (req: Request, res: Response) => {
     const { token, orderId } = req.body;
@@ -33,7 +35,7 @@ router.post(
       throw new BadRequestError("Cannot pay for an cancelled order");
     }
 
-    res.send({ success: true });
+    res.status(200).send({ success: true });
   }
 );
 
