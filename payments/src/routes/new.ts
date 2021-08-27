@@ -15,7 +15,7 @@ import { Payment } from "../models/payment";
 
 // events
 import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publisher";
-import { natsWrapper } from "../natsWrapper";
+import { natsWrapper } from "../nats-wrapper";
 
 // Stripe
 import { stripe } from "../stripe";

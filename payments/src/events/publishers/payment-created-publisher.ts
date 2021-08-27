@@ -4,6 +4,6 @@ import {
   Subjects,
 } from "@fujingrtickets/common";
 
-export class PaymentCreatedPublihser extends Publisher<PaymentCreatedEvent> {
+export class PaymentCreatedPublisher extends Publisher<PaymentCreatedEvent> {
   readonly subject = Subjects.PaymentCreated;
 }
